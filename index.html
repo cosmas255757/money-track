@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="main">
+        <div id="balanceDisplay">Balance: 0</div>
+        <div id="totalExpense">Total Expense: 0</div>
+        <div id="totalIncome">Total Income: 0</div>
+    </div>
+
+    <form id="trackerForm">
+        <!-- Amount Input -->
+      <div>
+                <label for="amount">Amount:</label>
+        <input type="number" id="amount" placeholder="Enter amount" required>
+      </div>
+
+        <!-- Toggle between Income and Expense -->
+          <div>
+                    <label for="typeSelect">Type:</label>
+        <select id="typeSelect">
+            <option value="#">--cartegory of money--</option>
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+        </select>
+
+          </div>
+        <!-- Expense Categories (Visible by default) -->
+        <div id="expenseCategoryGroup">
+            <label for="expenseCategory">Expense Category:</label>
+            <select id="expenseCategory">
+                <option value="#">---select cartegory---</option>
+                <option value="food">Food & Drinks</option>
+                <option value="rent">Rent/Bills</option>
+                <option value="transport">Transport</option>
+                <option value="shopping">Shopping</option>
+                <option value="loansPaid">Pay Loans</option>
+                <option value="#">Others</option>
+            </select>
+        </div>
+
+        <!-- Income Categories (Hidden by default) -->
+        <div id="incomeCategoryGroup" style="display: none;">
+            <label for="incomeCategory">Income Category:</label>
+            <select id="incomeCategory">
+                <option value="#">---select cartegory---</option>
+                <option value="salary">Salary</option>
+                <option value="freelance">Freelance</option>
+                <option value="gift">Gift</option>
+                <option value="investment">Investment</option>
+                <option value="#">Others</option>
+            </select>
+        </div> 
+
+        <!-- SUBMIT BUTTON -->
+        <button type="submit" id="submit">Submit</button>
+    </form>
+
+    <script src="index.js">
+
+    </script>
+</body>
+</html>
