@@ -3,116 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Money Tracker</title>
+    <title>Money Tracker | Atlas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- NAVIGATION -->
     <nav class="nav-container">
-        <div id="menuIcon" class="menu-icon">&#9776;</div>
+        <div id="menuIcon" class="menu-icon">☰</div>
         <ul id="navList" class="nav-links">
             <li><a href="#" id="linkDashboard">Dashboard</a></li>
             <li><a href="#" id="linkHistory">History</a></li>
             <li><a href="#" id="linkBudget">Budgets & Goals</a></li>
         </ul>
     </nav>
-<div id="pageDashboard" class="content-page">
-    <div class="main">
-        <div id="balanceDisplay">Balance: 0</div>
-        <div id="totalExpense">Total Expense: 0</div>
-        <div id="totalIncome">Total Income: 0</div>
-    </div>
 
-    <form id="trackerForm">
-          <!-- Amount Input -->
-      <div>
-                <label for="amount">Amount:</label>
-        <input type="number" id="amount" placeholder="Enter amount" required>
-      </div>
-
-        <!-- Toggle between Income and Expense -->
-          <div>
-                    <label for="typeSelect">Type:</label>
-        <select id="typeSelect">
-            <option value="#">--cartegory of money--</option>
-            <option value="expense">Expense</option>
-            <option value="income">Income</option>
-        </select>
-
-          </div>
-        <!-- Expense Categories (Visible by default) -->
-        <div id="expenseCategoryGroup">
-            <label for="expenseCategory">Expense Category:</label>
-            <select id="expenseCategory">
-                <option value="#">---select cartegory---</option>
-                <option value="food">Food & Drinks</option>
-                <option value="rent">Rent/Bills</option>
-                <option value="transport">Transport</option>
-                <option value="shopping">Shopping</option>
-                <option value="loansPaid">Pay Loans</option>
-                <option value="#">Others</option>
-            </select>
-        </div>
-
-        <!-- Income Categories (Hidden by default) -->
-        <div id="incomeCategoryGroup" style="display: none;">
-            <label for="incomeCategory">Income Category:</label>
-            <select id="incomeCategory">
-                <option value="#">---select cartegory---</option>
-                <option value="salary">Salary</option>
-                <option value="freelance">Freelance</option>
-                <option value="gift">Gift</option>
-                <option value="investment">Investment</option>
-                <option value="#">Others</option>
-            </select>
-        </div> 
-
-        <!-- SUBMIT BUTTON -->
-        <button type="submit" id="submit">Submit</button>
-    </form>
-<div class="history">
-    
-</div>
-</div>
-
-    <!-- PAGE 2: HISTORY PAGE (Hidden by default) -->
-    <div id="pageHistory" class="content-page" style="display: none;">
-        <div class="main">
-            <h2>Transaction History</h2>
-        </div>
-        <div class="history-container">
-            <div id="historyList">
-                <!-- Transactions will be injected here by JS -->
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Inside your nav-links <ul> -->
-<li><a href="#" id="linkBudget">Budgets & Goals</a></li>
-
-<!-- New Budget Page Section -->
-<div id="pageBudget" class="content-page" style="display: none;">
-    <div class="main">
-        <h2>Set Monthly Budget</h2>
-    </div>
-    <form id="budgetForm">
-        <label for="budgetLimit">Max Expense Limit:</label>
-        <input type="number" id="budgetLimit" placeholder="e.g. 500">
-        <button type="submit" id="submit">Save Budget</button>
-    </form>
-    <div id="budgetStatus" style="text-align: center; color: white; padding: 20px;">
-
+    <main class="container">
         
+        <!-- PAGE 1: DASHBOARD -->
+        <section id="pageDashboard" class="content-page">
+            <header class="main-header">
+                <div id="balanceDisplay" class="balance-card">Balance: 0.00</div>
+                <div class="stats-row">
+                    <div id="totalIncome" class="stat-income">Total Income: 0.00</div>
+                    <div id="totalExpense" class="stat-expense">Total Expense: 0.00</div>
+                </div>
+            </header>
+
+            <form id="trackerForm" class="transaction-form">
+                <h3>Add New Transaction</h3>
+                
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" placeholder="0.00" required step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label for="typeSelect">Transaction Type</label>
+                    <select id="typeSelect">
+                        <option value="#" disabled selected>-- Select Type --</option>
+                        <option value="expense">Expense</option>
+                        <option value="income">Income</option>
+                    </select>
+                </div>
+
+                <!-- Expense Categories -->
+                <div id="expenseCategoryGroup" class="form-group">
+                    <label for="expenseCategory">Expense Category</label>
+                    <select id="expenseCategory">
+                        <option value="#" disabled selected>--- Select Category ---</option>
+                        <option value="food">Food & Drinks</option>
+                        <option value="rent">Rent/Bills</option>
+                        <option value="transport">Transport</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="loansPaid">Pay Loans</option>
+                        <option value="other">Others</option>
+                    </select>
+                </div>
+
+                <!-- Income Categories -->
+                <div id="incomeCategoryGroup" class="form-group" style="display: none;">
+                    <label for="incomeCategory">Income Category</label>
+                    <select id="incomeCategory">
+                        <option value="#" disabled selected>--- Select Category ---</option>
+                        <option value="salary">Salary</option>
+                        <option value="freelance">Freelance</option>
+                        <option value="gift">Gift</option>
+                        <option value="investment">Investment</option>
+                        <option value="other">Others</option>
+                    </select>
+                </div> 
+
+                <button type="submit" class="btn-submit">Add Transaction</button>
+            </form>
+        </section>
+
+        <!-- PAGE 2: HISTORY -->
+        <section id="pageHistory" class="content-page" style="display: none;">
+            <div class="section-header">
+                <h2>Transaction History</h2>
+            </div>
+            <div class="history-container">
+                <div id="historyList">
+                    <!-- Transactions injected by JS -->
+                </div>
+            </div>
+        </section>
+
+      <!-- PAGE 3: BUDGETS & GOALS -->
+<section id="pageBudget" class="content-page" style="display: none;">
+    
+    <!-- 1. Header Section -->
+    <div class="section-header">
+        <h2>Monthly Budgeting</h2>
     </div>
-</div>
+
+    <!-- 2. Visual Status: Budget Limit Display Block -->
+    <div class="budget-card">
+        <p>Active Budget Limit</p>
+        <h1 id="activeBudgetLimit">0.00</h1>
+        <!-- Optional: Small status text -->
+        <small id="budgetStatusLabel" style="color: #666;">Set a limit to track your spending</small>
+    </div>
+
+    <!-- 3. Action Section: Set/Update Budget Form -->
+    <form id="budgetForm" class="transaction-form">
+        <h3>Adjust Limit</h3>
+        
+        <div class="form-group">
+            <label for="budgetLimit">Max Expense Limit</label>
+            <input type="number" id="budgetLimit" placeholder="Enter amount (e.g. 500)" step="0.01">
+        </div>
+
+        <button type="submit" class="btn-submit">Update Budget</button>
+    </form>
+
+    <!-- 4. Information: Feedback/Alerts -->
+    <div id="budgetStatus" class="budget-info">
+        <!-- JS will inject warnings here if the budget is exceeded -->
+    </div>
+
+</section>
 
     <footer>
-    <p>&copy;<span id="year"></span> ~Mr Cosmas Atlas Founder</p>
-</footer>
+        <p>&copy; <span id="year"></span> ~ Mr. Cosmas Atlas, Founder</p>
+    </footer>
 
-    <script src="index.js">
-
-    </script>
+    <script src="index.js"></script>
 </body>
 </html>
