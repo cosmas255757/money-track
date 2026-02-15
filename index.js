@@ -2,6 +2,13 @@
 const trackerForm = document.getElementById('trackerForm');
 const amountInput = document.getElementById('amount');
 const typeSelect = document.getElementById('typeSelect');
+const menuIcon = document.getElementById('menuIcon');
+const navList = document.getElementById('navList');
+const linkDashboard = document.getElementById('linkDashboard');
+const linkHistory = document.getElementById('linkHistory');
+const pageDashboard = document.getElementById('pageDashboard');
+const pageHistory = document.getElementById('pageHistory');
+const historyList = document.getElementById('historyList');
 
 // Category Groups
 const expenseGroup = document.getElementById('expenseCategoryGroup');
@@ -45,20 +52,20 @@ trackerForm.addEventListener('submit', function(e) {
     }
 
     // CALCULATION LOGIC
-    if (type === 'income') {
-        totalIncome += amount;
-    } else {
-        totalExpense += amount;
-    }
+    // if (type === 'income') {
+    //     totalIncome += amount;
+    // } else {
+    //     totalExpense += amount;
+    // }
 
-    const currentBalance = totalIncome - totalExpense;
+    // const currentBalance = totalIncome - totalExpense;
 
     // UPDATE THE HTML DISPLAY
-    totalIncomeDisplay.innerText = `Total Income: ${totalIncome}`;
-    totalExpenseDisplay.innerText = `Total Expense: ${totalExpense}`;
-    balanceDisplay.innerText = `Balance: ${currentBalance}`;
+    // totalIncomeDisplay.innerText = `Total Income: ${totalIncome}`;
+    // totalExpenseDisplay.innerText = `Total Expense: ${totalExpense}`;
+    // balanceDisplay.innerText = `Balance: ${currentBalance}`;
 
-    // Optional: Style balance based on value
+    //  Style balance based on value
     balanceDisplay.style.color = currentBalance < 0 ? "red" : "green";
 
     //RESET FORM
@@ -72,17 +79,7 @@ trackerForm.addEventListener('submit', function(e) {
     // Automatically sets the current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // --- 1. Element Selectors ---
-const menuIcon = document.getElementById('menuIcon');
-const navList = document.getElementById('navList');
-const linkDashboard = document.getElementById('linkDashboard');
-const linkHistory = document.getElementById('linkHistory');
-
-const pageDashboard = document.getElementById('pageDashboard');
-const pageHistory = document.getElementById('pageHistory');
-
-
-// --- 2. Navigation Logic (Page Switching) ---
+// ---- Navigation Logic (Page Switching) ---
 
 // Toggle Menu Dropdown
 menuIcon.addEventListener('click', () => {
@@ -109,13 +106,7 @@ linkHistory.addEventListener('click', (e) => {
 // Load data from LocalStorage or start with an empty array
 let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
 
-// ---  Element Selectors (Add these to your existing ones) ---
-const expenseCategory = document.getElementById('expenseCategory');
-const incomeCategory = document.getElementById('incomeCategory');
-const historyList = document.getElementById('historyList');
-
-
-// --- 3. Functions ---
+// --- Functions ---
 
 // Save to LocalStorage and Refresh UI
 function updateUI() {
@@ -134,9 +125,9 @@ function calculateTotals() {
         else expense += trx.amount;
     });
 
-    totalIncomeDisplay.textContent = `Total Income: $${income.toFixed(2)}`;
-    totalExpenseDisplay.textContent = `Total Expense: $${expense.toFixed(2)}`;
-    balanceDisplay.textContent = `Balance: $${(income - expense).toFixed(2)}`;
+    totalIncomeDisplay.textContent = `Total Income: ${income.toFixed(2)}`;
+    totalExpenseDisplay.textContent = `Total Expense: ${expense.toFixed(2)}`;
+    balanceDisplay.textContent = `Balance: ${(income - expense).toFixed(2)}`;
 }
 
 // Display Transactions in History Page
@@ -155,9 +146,17 @@ function renderHistory() {
         const color = trx.type === 'income' ? '#2ecc71' : '#e74c3c';
         
         div.innerHTML = `
-            <div style="display:flex; justify-content:space-between; background:white; padding:10px; margin:5px; border-left: 5px solid ${color}; border-radius:5px; color: black; font-size: 0.8em;">
+            <div style="display:flex; justify-content:space-between; 
+            background:white; 
+            padding:10px; 
+            margin:5px; 
+            border-left: 5px solid ${color}; 
+            border-radius:5px; 
+            color: black; 
+            font-size: 0.8em;">
+
                 <span><strong>${trx.category}</strong></span>
-                <span style="color:${color}">${trx.type === 'income' ? '+' : '-'}$${trx.amount}</span>
+                <span style="color:${color}">${trx.type === 'income' ? '+' : '-'}${trx.amount}</span>
                 <button onclick="deleteTransaction(${index})" style="background:none; border:none; color:red; cursor:pointer; font-weight:bold;">X</button>
             </div>
         `;
@@ -181,7 +180,6 @@ trackerForm.addEventListener('submit', (e) => {
     const category = type === 'income' ? incomeCategory.value : expenseCategory.value;
 
 
-
     const newTransaction = {
         amount,
         type,
@@ -192,12 +190,11 @@ trackerForm.addEventListener('submit', (e) => {
     transactions.push(newTransaction);
     updateUI();
     
-    // Reset Form
-    trackerForm.reset();
-    expenseGroup.style.display = 'block';
-    incomeGroup.style.display = 'none';
-    
-    alert("Transaction Added!");
+    // // Reset Form
+    // trackerForm.reset();
+    // expenseGroup.style.display = 'block';
+    // incomeGroup.style.display = 'none';
+    console.log("Transaction Added!")
 });
 
 // Initial Load
