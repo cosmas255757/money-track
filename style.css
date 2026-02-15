@@ -1,3 +1,4 @@
+/* 1. GLOBAL STYLES */
 * {
     padding: 0;
     margin: 0;
@@ -13,121 +14,7 @@ body {
     overflow-x: hidden; /* Prevents tiny horizontal scrolls */
 }
 
-.main {
-    display: flex;
-    justify-content: center;
-    padding: 1em;
-    align-items: center; /* Centers form vertically */
-    background-color: rgba(0, 200, 10, 0.5);
-    gap: 1.5em;
-    font-size: 1.2em;
-    flex-wrap: wrap;
-    animation: slideUp 0.6s ease-out forwards;
-}
-
-form {
-    background-color: rgba(0, 200, 10, 0.75);
-    padding: 2em;
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-    font-size: 1.8em;
-    gap: 1em;
-    align-items: center;
-    flex-direction: column;
-    text-align: start;
-    flex: 1;
-    /* Animation: Entrance */
-    animation: slideUp 0.6s ease-out forwards;
-}
-
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-input, select {
-    border: none;
-    padding: 10px; /* Better touch target */
-    border-radius: 5px;
-    font-family: Arial, 'Times New Roman';
-    font-size: 0.6em;
-    width: 100%; /* Makes inputs fill form width */
-    transition: transform 0.2s ease;
-}
-
-input:focus, select:focus {
-    outline: 2px solid rgb(38, 58, 58);
-    transform: scale(1.02);
-}
-
-select option {
-    font-family: 'Arial', sans-serif;
-    background-color: cyan;
-    color: #0f0b0b;
-    padding: 10px;
-    font-size: 1.4em;
-}
-
-#submit {
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-family: Arial, 'Times New Roman'; 
-    background-color: rgb(38, 58, 58);
-    color: white;
-    cursor: pointer;
-    font-size: 0.75em;
-    width: 100%;
-    transition: all 0.3s ease;
-    animation: slideUp 0.6s ease-out forwards;
-}
-
-#submit:hover {
-    background-color: #1a1a1a;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-footer {
-    background-color: black;
-    color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    animation: slideUp 0.6s ease-out forwards;
-}
-
-p {
-    max-width: 100%; 
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    text-align: center;
-}
-
-/* Tablet/Mobile Adjustments */
-@media (max-width: 600px) {
-    form {
-        font-size: 1.4em;
-        padding: 0.4em;
-    }
-.menu-icon {
-    font-size: 5px;
-    cursor: pointer;
-    background: rgb(38, 58, 58);
-    color: white;
-    border-radius: 5px;
-}
-.nav-container {
-    font-size: 5px;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
+/* 2. NAVIGATION (Must be outside media query to work everywhere) */
 .nav-container {
     position: fixed;
     top: 10px;
@@ -171,7 +58,7 @@ p {
     background: rgba(0, 200, 10, 0.2);
 }
 
-/* Page Transition Animation */
+/* 3. LAYOUT & CONTAINERS */
 .content-page {
     animation: fadeIn 0.5s ease-in-out;
     display: flex;
@@ -179,13 +66,122 @@ p {
     background-color: rgba(0, 200, 10, 0.75);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
 #pageDashboard {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
+.main {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+    align-items: center; /* Centers form vertically */
+    background-color: rgba(0, 200, 10, 0.5);
+    gap: 1.5em;
+    font-size: 1.2em;
+    flex-wrap: wrap;
+    animation: slideUp 0.6s ease-out forwards;
+}
+
+/* 4. FORM ELEMENTS */
+form {
+    background-color: rgba(0, 200, 10, 0.75);
+    padding: 2em;
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    font-size: 1.8em;
+    gap: 1em;
+    align-items: center;
+    flex-direction: column;
+    text-align: start;
+    flex: 1;
+    animation: slideUp 0.6s ease-out forwards;
+}
+
+input, select {
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: Arial, 'Times New Roman';
+    font-size: 0.6em;
+    width: 100%;
+    transition: transform 0.2s ease;
+}
+
+input:focus, select:focus {
+    outline: 2px solid rgb(38, 58, 58);
+    transform: scale(1.02);
+}
+
+select option {
+    font-family: 'Arial', sans-serif;
+    background-color: cyan;
+    color: #0f0b0b;
+    padding: 10px;
+    font-size: 1.4em;
+}
+
+#submit {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: Arial, 'Times New Roman'; 
+    background-color: rgb(38, 58, 58);
+    color: white;
+    cursor: pointer;
+    font-size: 0.75em;
+    width: 100%;
+    transition: all 0.3s ease;
+    animation: slideUp 0.6s ease-out forwards;
+}
+
+#submit:hover {
+    background-color: #1a1a1a;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* 5. FOOTER */
+footer {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    animation: slideUp 0.6s ease-out forwards;
+}
+
+p {
+    max-width: 100%; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+/* 6. ANIMATIONS */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 7. TABLET/MOBILE ADJUSTMENTS */
+@media (max-width: 600px) {
+    form {
+        font-size: 1.4em;
+        padding: 1em; /* Adjusted from 0.4em for better spacing */
+    }
+    
+    .main {
+        padding-top: 50px; /* Make room for navigation icon */
+    }
+}
