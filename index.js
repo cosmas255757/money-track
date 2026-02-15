@@ -68,8 +68,6 @@ trackerForm.addEventListener('submit', function(e) {
     //  Style balance based on value
     balanceDisplay.style.color = currentBalance < 0 ? "red" : "green";
 
-    //RESET FORM
-    trackerForm.reset();
     // Keep the logic consistent after reset
     expenseGroup.style.display = 'block';
     incomeGroup.style.display = 'none';
@@ -199,3 +197,6 @@ trackerForm.addEventListener('submit', (e) => {
 
 // Initial Load
 updateUI();
+
+ trackerForm.reset(); //RESET FORM
+   

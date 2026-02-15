@@ -115,12 +115,14 @@ p {
         padding: 0.4em;
     }
 .menu-icon {
-    font-size: 15px;
+    font-size: 5px;
     cursor: pointer;
     background: rgb(38, 58, 58);
     color: white;
-    padding: 5px 8px;
     border-radius: 5px;
+}
+.nav-container {
+    font-size: 5px;
 }
 }
 
