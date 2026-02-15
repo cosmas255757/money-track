@@ -67,3 +67,7 @@ trackerForm.addEventListener('submit', function(e) {
     expenseGroup.style.display = 'block';
     incomeGroup.style.display = 'none';
 });
+
+
+    // Automatically sets the current year
+    document.getElementById('year').textContent = new Date().getFullYear();
