@@ -21,6 +21,15 @@ const balanceDisplay = document.getElementById('balanceDisplay');
 const totalExpenseDisplay = document.getElementById('totalExpense');
 const totalIncomeDisplay = document.getElementById('totalIncome');
 
+
+const linkBudget = document.getElementById('linkBudget');
+const pageBudget = document.getElementById('pageBudget');
+const budgetForm = document.getElementById('budgetForm');
+const budgetLimitInput = document.getElementById('budgetLimit');
+
+let monthlyBudget = localStorage.getItem('monthlyBudget') || 0;
+
+ 
 // --- 2. DATA STORAGE ---
 // Load data from LocalStorage or start with empty array
 let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
@@ -140,21 +149,74 @@ menuIcon.addEventListener('click', () => {
     navList.classList.toggle('active');
 });
 
-// Navigation: Switch to Dashboard
-linkDashboard.addEventListener('click', (e) => {
-    e.preventDefault();
-    pageDashboard.style.display = 'block';
-    pageHistory.style.display = 'none';
-    navList.classList.remove('active');
+// // Navigation: Switch to Dashboard
+// linkDashboard.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     pageDashboard.style.display = 'block';
+//     pageHistory.style.display = 'none';
+//     navList.classList.remove('active');
+// });
+
+// // Navigation: Switch to History
+// linkHistory.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     pageDashboard.style.display = 'none';
+//     pageHistory.style.display = 'block';
+//     navList.classList.remove('active');
+// });
+
+
+// 1. Select all your page elements
+const pages = document.querySelectorAll('.content-page');
+const navLinks = {
+    'linkDashboard': 'pageDashboard',
+    'linkHistory': 'pageHistory',
+    'linkBudget': 'pageBudget'
+};
+
+// 2. The Master Switch Function
+function showPage(pageId) {
+    pages.forEach(page => {
+        page.style.display = 'none'; // Hide every page
+    });
+
+    const activePage = document.getElementById(pageId);
+    if (activePage) {
+        activePage.style.display = 'block'; // Show only the selected one
+        
+        // Trigger animations by removing and re-adding the class
+        activePage.style.animation = 'none';
+        activePage.offsetHeight; // trigger reflow
+        activePage.style.animation = null; 
+    }
+}
+
+// 3. Attach Event Listeners to all links
+Object.keys(navLinks).forEach(linkId => {
+    const linkElement = document.getElementById(linkId);
+    if (linkElement) {
+        linkElement.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(navLinks[linkId]);
+            navList.classList.remove('active'); // Close mobile menu after clicking
+        });
+    }
 });
 
-// Navigation: Switch to History
-linkHistory.addEventListener('click', (e) => {
+
+
+budgetForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    pageDashboard.style.display = 'none';
-    pageHistory.style.display = 'block';
-    navList.classList.remove('active');
+    monthlyBudget = parseFloat(budgetLimitInput.value);
+    localStorage.setItem('monthlyBudget', monthlyBudget);
+    alert(`Budget set to ${monthlyBudget}`);
+    updateUI();
 });
+
+    if (monthlyBudget > 0 && expense > monthlyBudget) {
+        alert(`⚠️ WARNING: You have exceeded your budget! \nLimit: ${monthlyBudget} \nSpent: ${expense}`);
+        balanceDisplay.style.color = "orange"; // Visual warning
+    }
 
 // Set Footer Year
 document.getElementById('year').textContent = new Date().getFullYear();

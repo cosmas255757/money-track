@@ -13,6 +13,7 @@
         <ul id="navList" class="nav-links">
             <li><a href="#" id="linkDashboard">Dashboard</a></li>
             <li><a href="#" id="linkHistory">History</a></li>
+            <li><a href="#" id="linkBudget">Budgets & Goals</a></li>
         </ul>
     </nav>
 <div id="pageDashboard" class="content-page">
@@ -86,6 +87,26 @@
             </div>
         </div>
     </div>
+
+    <!-- Inside your nav-links <ul> -->
+<li><a href="#" id="linkBudget">Budgets & Goals</a></li>
+
+<!-- New Budget Page Section -->
+<div id="pageBudget" class="content-page" style="display: none;">
+    <div class="main">
+        <h2>Set Monthly Budget</h2>
+    </div>
+    <form id="budgetForm">
+        <label for="budgetLimit">Max Expense Limit:</label>
+        <input type="number" id="budgetLimit" placeholder="e.g. 500">
+        <button type="submit" id="submit">Save Budget</button>
+    </form>
+    <div id="budgetStatus" style="text-align: center; color: white; padding: 20px;">
+
+        
+    </div>
+</div>
+
     <footer>
     <p>&copy;<span id="year"></span> ~Mr Cosmas Atlas Founder</p>
 </footer>
