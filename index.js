@@ -71,3 +71,134 @@ trackerForm.addEventListener('submit', function(e) {
 
     // Automatically sets the current year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // --- 1. Element Selectors ---
+const menuIcon = document.getElementById('menuIcon');
+const navList = document.getElementById('navList');
+const linkDashboard = document.getElementById('linkDashboard');
+const linkHistory = document.getElementById('linkHistory');
+
+const pageDashboard = document.getElementById('pageDashboard');
+const pageHistory = document.getElementById('pageHistory');
+
+
+// --- 2. Navigation Logic (Page Switching) ---
+
+// Toggle Menu Dropdown
+menuIcon.addEventListener('click', () => {
+    navList.classList.toggle('active');
+});
+
+// Switch to Dashboard
+linkDashboard.addEventListener('click', (e) => {
+    e.preventDefault();
+    pageDashboard.style.display = 'block';
+    pageHistory.style.display = 'none';
+    navList.classList.remove('active'); // Close menu
+});
+
+// Switch to History
+linkHistory.addEventListener('click', (e) => {
+    e.preventDefault();
+    pageDashboard.style.display = 'none';
+    pageHistory.style.display = 'block';
+    navList.classList.remove('active'); // Close menu
+});
+
+// --- Data Storage ---
+// Load data from LocalStorage or start with an empty array
+let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+// ---  Element Selectors (Add these to your existing ones) ---
+const expenseCategory = document.getElementById('expenseCategory');
+const incomeCategory = document.getElementById('incomeCategory');
+const historyList = document.getElementById('historyList');
+
+
+// --- 3. Functions ---
+
+// Save to LocalStorage and Refresh UI
+function updateUI() {
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+    renderHistory();
+    calculateTotals();
+}
+
+// Calculate Balance, Income, and Expenses
+function calculateTotals() {
+    let income = 0;
+    let expense = 0;
+
+    transactions.forEach(trx => {
+        if (trx.type === 'income') income += trx.amount;
+        else expense += trx.amount;
+    });
+
+    totalIncomeDisplay.textContent = `Total Income: $${income.toFixed(2)}`;
+    totalExpenseDisplay.textContent = `Total Expense: $${expense.toFixed(2)}`;
+    balanceDisplay.textContent = `Balance: $${(income - expense).toFixed(2)}`;
+}
+
+// Display Transactions in History Page
+function renderHistory() {
+    historyList.innerHTML = ''; // Clear current list
+
+    if (transactions.length === 0) {
+        historyList.innerHTML = '<p style="text-align:center; padding:20px;">No records found.</p>';
+        return;
+    }
+
+    transactions.forEach((trx, index) => {
+        const div = document.createElement('div');
+        div.className = 'history-item';
+        // Style based on type
+        const color = trx.type === 'income' ? '#2ecc71' : '#e74c3c';
+        
+        div.innerHTML = `
+            <div style="display:flex; justify-content:space-between; background:white; padding:10px; margin:5px; border-left: 5px solid ${color}; border-radius:5px; color: black; font-size: 0.8em;">
+                <span><strong>${trx.category}</strong></span>
+                <span style="color:${color}">${trx.type === 'income' ? '+' : '-'}$${trx.amount}</span>
+                <button onclick="deleteTransaction(${index})" style="background:none; border:none; color:red; cursor:pointer; font-weight:bold;">X</button>
+            </div>
+        `;
+        historyList.appendChild(div);
+    });
+}
+
+// Delete a Transaction
+window.deleteTransaction = function(index) {
+    transactions.splice(index, 1);
+    updateUI();
+};
+
+// --- 4. Event Listeners ---
+
+trackerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const amount = parseFloat(amountInput.value);
+    const type = typeSelect.value;
+    const category = type === 'income' ? incomeCategory.value : expenseCategory.value;
+
+
+
+    const newTransaction = {
+        amount,
+        type,
+        category,
+        date: new Date().toLocaleDateString()
+    };
+
+    transactions.push(newTransaction);
+    updateUI();
+    
+    // Reset Form
+    trackerForm.reset();
+    expenseGroup.style.display = 'block';
+    incomeGroup.style.display = 'none';
+    
+    alert("Transaction Added!");
+});
+
+// Initial Load
+updateUI();

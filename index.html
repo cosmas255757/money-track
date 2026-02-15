@@ -7,7 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+
+    <nav class="nav-container">
+        <div id="menuIcon" class="menu-icon">&#9776;</div>
+        <ul id="navList" class="nav-links">
+            <li><a href="#" id="linkDashboard">Dashboard</a></li>
+            <li><a href="#" id="linkHistory">History</a></li>
+        </ul>
+    </nav>
+<div id="pageDashboard" class="content-page">
     <div class="main">
         <div id="balanceDisplay">Balance: 0</div>
         <div id="totalExpense">Total Expense: 0</div>
@@ -64,6 +72,20 @@
 <div class="history">
     
 </div>
+</div>
+
+    <!-- PAGE 2: HISTORY PAGE (Hidden by default) -->
+    <div id="pageHistory" class="content-page" style="display: none;">
+        <div class="main">
+            <h2>Transaction History</h2>
+        </div>
+        <div class="history-container">
+            <div id="historyList">
+                <!-- Transactions will be injected here by JS -->
+                <p style="text-align:center; padding: 20px;">No transactions yet.</p>
+            </div>
+        </div>
+    </div>
     <footer>
     <p>&copy;<span id="year"></span> ~Mr Cosmas Atlas Founder</p>
 </footer>

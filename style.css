@@ -115,3 +115,57 @@ p {
         padding: 0.4em;
     }
 }
+
+.nav-container {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1001;
+}
+
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+    background: rgb(38, 58, 58);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 5px;
+}
+
+.nav-links {
+    display: none; /* Hidden until clicked */
+    list-style: none;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    margin-top: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.nav-links.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.nav-links li a {
+    display: block;
+    padding: 15px 25px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.nav-links li a:hover {
+    background: rgba(0, 200, 10, 0.2);
+}
+
+/* Page Transition Animation */
+.content-page {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
