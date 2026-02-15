@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box; /* Essential for responsiveness */
     font-family: Arial, 'Times New Roman';
 }
 
@@ -8,38 +9,56 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; 
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevents tiny horizontal scrolls */
 }
+
 .main {
     display: flex;
     justify-content: center;
+    padding: 1em;
+    align-items: center; /* Centers form vertically */
     background-color: rgba(0, 200, 10, 0.5);
     gap: 1.5em;
-    margin-top: 0;
-    padding: 1.1em;
     font-size: 1.2em;
     flex-wrap: wrap;
+    animation: slideUp 0.6s ease-out forwards;
 }
 
-form{
+form {
     background-color: rgba(0, 200, 10, 0.75);
-    padding: 1em;
+    padding: 2em;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     flex-wrap: wrap;
     font-size: 1.8em;
     gap: 1em;
     align-items: center;
-    flex: 1;
     flex-direction: column;
     text-align: start;
+    flex: 1;
+    /* Animation: Entrance */
+    animation: slideUp 0.6s ease-out forwards;
 }
-input{
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+input, select {
     border: none;
-    padding: 5px;
+    padding: 10px; /* Better touch target */
     border-radius: 5px;
     font-family: Arial, 'Times New Roman';
-    font-size: 0.5em;
+    font-size: 0.6em;
+    width: 100%; /* Makes inputs fill form width */
+    transition: transform 0.2s ease;
+}
+
+input:focus, select:focus {
+    outline: 2px solid rgb(38, 58, 58);
+    transform: scale(1.02);
 }
 
 select option {
@@ -48,38 +67,51 @@ select option {
     color: #0f0b0b;
     padding: 10px;
     font-size: 1.4em;
+}
 
-}
-select{
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    font-family: Arial, 'Times New Roman';
-    font-size: 0.5em;
-}
 #submit {
     border: none;
-    padding: 5px;
+    padding: 10px 20px;
     border-radius: 5px;
     font-family: Arial, 'Times New Roman'; 
     background-color: rgb(38, 58, 58);
     color: white;
     cursor: pointer;
     font-size: 0.75em;
+    width: 100%;
+    transition: all 0.3s ease;
+    animation: slideUp 0.6s ease-out forwards;
 }
 
-footer{
+#submit:hover {
+    background-color: #1a1a1a;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+footer {
     background-color: black;
     color: white;
     padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    animation: slideUp 0.6s ease-out forwards;
 }
+
 p {
-    width: 100vh;
+    max-width: 100%; 
     display: flex;
     flex-wrap: wrap;
-
+    justify-content: center;
+    text-align: center;
 }
 
+/* Tablet/Mobile Adjustments */
+@media (max-width: 600px) {
+    form {
+        font-size: 1.4em;
+        padding: 0.4em;
+    }
+}
